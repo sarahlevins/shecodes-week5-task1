@@ -5,22 +5,16 @@
 # 3. You can now get the check digit by working out what number would have to be added to the sum in 
 # order to bring it up to a multiple of 10. If the number is already a multiple of 10, the check digit is 0.
 
-GTIN = int(input('Enter your 13 digit GTIN product code: '))
+GTIN = input('Enter your 13 digit GTIN product code: ')
+
 GTIN_list = []
 
 for a in GTIN:
-    GTIN_list.append (a)
+    GTIN_list.append (int(a))
 
-print(GTIN_list)
+times_one = GTIN_list[1::2]
+times_three = [i * 3 for i in GTIN_list[::2]]
 
-times_three = GTIN_list[::2]
-
+print(times_one)
 print(times_three)
 
-x = 0
-for a in times_three:
-    times_three[x] = a * 3
-    x += 1
-
-
-print(times_three)
