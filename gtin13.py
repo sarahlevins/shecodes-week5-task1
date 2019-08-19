@@ -18,3 +18,13 @@ times_three = [i * 3 for i in GTIN_list[::2]]
 print(times_one)
 print(times_three)
 
+print(sum(times_one+times_three))
+
+times_one+times_three % 10 == remainder
+
+if remainder == 0:
+    check_digit = 0
+else:
+    check_digit = remainder - 10
+
+print(check_digit)
