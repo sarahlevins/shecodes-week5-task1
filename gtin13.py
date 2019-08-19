@@ -15,16 +15,15 @@ for a in GTIN:
 times_one = GTIN_list[1::2]
 times_three = [i * 3 for i in GTIN_list[::2]]
 
-print(times_one)
-print(times_three)
+total = sum(times_one+times_three)
 
-print(sum(times_one+times_three))
-
-times_one+times_three % 10 == remainder
+print(total)
+remainder = total % 10
 
 if remainder == 0:
     check_digit = 0
+    print(f'check digit is {check_digit}')
 else:
-    check_digit = remainder - 10
+    check_digit = 10 - remainder
+    print(f'check digit is {check_digit}')
 
-print(check_digit)
