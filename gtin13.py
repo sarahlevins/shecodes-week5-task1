@@ -1,30 +1,23 @@
-# GTIN-13 check digits are calculated as follows:
+def calculate_gtin13_barcode_check_digit(gtin):
 
-# 1. Multiply every second digit by 3, and every other digit by 1.
-# 2. Add up all the multiplied numbers.
-# 3. You can now get the check digit by working out what number would have to be added to the sum in 
-# order to bring it up to a multiple of 10. If the number is already a multiple of 10, the check digit is 0.
+    #turn string input into a list of integers
+    GTIN_list = []
+    for digit in range(len(gtin)):
+        GTIN_list.append (int(gtin[digit]))
 
-GTIN = input('Enter your 13 digit GTIN product code: ')
+    # add multiples together and find out remainder when divisible by 10
+    remainder = sum(GTIN_list[0::2]+[i * 3 for i in GTIN_list[1::2]]) % 10
 
-GTIN_list = []
+    #calculate check digit based on result
+    if remainder == 0:
+        check_digit = 0
+    else:
+        check_digit = 10 - remainder
+    return str(check_digit)
 
-for a in GTIN:
-    GTIN_list.append (int(a))
-
-times_one = GTIN_list[1::2]
-times_three = [i * 3 for i in GTIN_list[::2]]
-
-print(times_one)
-print(times_three)
-
-print(sum(times_one+times_three))
-
-times_one+times_three % 10 == remainder
-
-if remainder == 0:
-    check_digit = 0
-else:
-    check_digit = remainder - 10
-
-print(check_digit)
+def validate_gtin13_barcode_check_digit(gtin):
+    #calculate check digit based on result
+    if calculate_gtin13_barcode_check_digit(gtin) == gtin[12]:
+        return ('This is a valid gtin13 barcode.')
+    else:
+        return ('This is an invalid gtin13 barcode.')
